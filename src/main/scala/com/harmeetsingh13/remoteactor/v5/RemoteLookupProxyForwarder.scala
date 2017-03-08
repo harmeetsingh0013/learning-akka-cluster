@@ -1,6 +1,7 @@
-package com.harmeetsingh13.remoteactor.v4
+package com.harmeetsingh13.remoteactor.v5
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props, ReceiveTimeout, Terminated}
+import akka.actor.{Actor, ActorLogging, ActorRef, AddressFromURIString, Deploy, Props, ReceiveTimeout, Terminated}
+import akka.remote.RemoteScope
 
 import scala.concurrent.duration.{Duration, DurationLong}
 
@@ -13,7 +14,13 @@ class RemoteLookupProxyForwarder extends Actor with ActorLogging {
   deployAndWatch
 
   def deployAndWatch: Unit = {
-    val actor = context.actorOf(Props[RemoteActorR1], "echo")
+    val uri = "akka.tcp://remote-r1@0.0.0.0:2551"
+    val remoteR1Address = AddressFromURIString(uri)
+
+    val props = Props[RemoteActorR1].withDeploy(
+      Deploy(scope = RemoteScope(remoteR1Address))
+    )
+    val actor = context.actorOf(props, "echo")
     context.watch(actor)
     log.info("switching to may be active state")
     context.become(maybeActive(actor))

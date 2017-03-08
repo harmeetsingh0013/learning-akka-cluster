@@ -4,7 +4,7 @@ import akka.actor.{ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
 /**
-  * Created by harmeet on 2/3/17.
+  * Created by Harmeet Singh(Taara) on 2/3/17.
   */
 
 object RemoteActorR2 {

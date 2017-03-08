@@ -1,4 +1,4 @@
-package com.harmeetsingh13.remoteactor.v3
+package com.harmeetsingh13.remoteactor.v2
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
@@ -9,7 +9,7 @@ import com.typesafe.config.ConfigFactory
 class RemoteActorR1 extends Actor with ActorLogging {
 
   override def receive: Receive = {
-    case msg => log.info(s"Server Received $msg")
+    case msg => log.info(s"Remote R1 Received $msg")
   }
 }
 
@@ -17,7 +17,8 @@ object RemoteActorR1 {
 
   def main(args: Array[String]): Unit = {
     val config = ConfigFactory.parseString(conf)
-    ActorSystem("remote-r1", config)
+    val server = ActorSystem("remote-r1", config)
+    server.actorOf(Props[RemoteActorR1], "echo")
   }
 
   val conf =

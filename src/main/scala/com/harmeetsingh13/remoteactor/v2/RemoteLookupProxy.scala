@@ -5,7 +5,7 @@ import akka.actor.{Actor, ActorIdentity, ActorLogging, ActorRef, Identify, Recei
 import scala.concurrent.duration.{Duration, DurationLong}
 
 /**
-  * Created by harmeet on 2/3/17.
+  * Created by Harmeet Singh(Taara) on 2/3/17.
   */
 class RemoteLookupProxy(path: String) extends Actor with ActorLogging {
 

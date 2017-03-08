@@ -4,7 +4,7 @@ import akka.actor.{ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
 /**
-  * Created by harmeet on 2/3/17.
+  * Created by Harmeet Singh(Taara) on 2/3/17.
   */
 
 object RemoteActorR2 {
@@ -16,6 +16,7 @@ object RemoteActorR2 {
     val remoteR1 = ref.actorOf(RemoteLookupProxyForwarder.props, RemoteLookupProxyForwarder.name)
 
     Thread.sleep(20000)
+    println(" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ")
     remoteR1 ! "Hello Server1"
     remoteR1 ! "Hello Server2"
     remoteR1 ! "Hello Server3"

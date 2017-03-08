@@ -4,7 +4,7 @@ import akka.actor.{Actor, ActorLogging, ActorSystem}
 import com.typesafe.config.ConfigFactory
 
 /**
-  * Created by harmeet on 2/3/17.
+  * Created by Harmeet Singh(Taara) on 2/3/17.
   */
 class RemoteActorR1 extends Actor with ActorLogging {
 
@@ -23,6 +23,8 @@ object RemoteActorR1 {
   val conf =
     """
       |akka {
+      |  log-dead-letters = "ON"
+      |
       |  actor {
       |    provider = "akka.remote.RemoteActorRefProvider"
       |  }

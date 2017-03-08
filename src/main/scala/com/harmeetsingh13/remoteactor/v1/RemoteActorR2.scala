@@ -1,31 +1,28 @@
-package com.harmeetsingh13.remoteactor.v2
+package com.harmeetsingh13.remoteactor.v1
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
 /**
-  * Created by harmeet on 2/3/17.
+  * Created by Harmeet Singh(Taara) on 2/3/17.
   */
-class ClientActor extends Actor with ActorLogging {
+class RemoteActorR2 extends Actor with ActorLogging {
 
   override def receive: Receive = ???
 }
 
-object ClientActor {
+object RemoteActorR2 {
 
   def main (args: Array[String] ): Unit = {
     val config = ConfigFactory.parseString(conf)
-    val client = ActorSystem("Client", config)
-    client.actorOf(Props[EchoServerActor], "client")
+    val client = ActorSystem("remote-r2", config)
+    client.actorOf(Props[RemoteActorR1], "echo")
 
-    val path = "akka.tcp://Server@0.0.0.0:2551/user/server"
-    val simple = client.actorOf(Props(new RemoteLookupProxy(path)), "proxy")
+    val path = "akka.tcp://remote-r1@0.0.0.0:2551/user/echo"
+    val simple = client.actorSelection(path)
 
-    Thread.sleep(1000)
+    simple ! "Hello Server"
 
-    simple ! "Hello Server1"
-    simple ! "Hello Server2"
-    simple ! "Hello Server3"
   }
 
   val conf =
