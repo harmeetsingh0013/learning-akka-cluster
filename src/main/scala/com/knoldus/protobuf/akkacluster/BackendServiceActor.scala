@@ -21,15 +21,15 @@ class BackendServiceActor extends Actor with ActorLogging {
 
     override def receive : Receive = {
         case gameMessage @ GameMessage("ping", _, _, _, _, _, _, _, _, _, _, _) =>
-            log.info("I am received ping message..... {}", gameMessage)
+            log.info("\n\n\n\n\n I received ping message..... {}\n\n\n\n\n", gameMessage)
 
             context.actorSelection("akka.tcp://ClusterSystem@192.168.1.55:9892/user/backend") ! gameMessage.copy(msg = "pong")
 
         case gameMessage @ GameMessage("pong", ref, _, _, _, _, _, _, _, _, _, _) =>
-            log.info("I am received pong message..... {}", gameMessage)
+            log.info("\n\n\n\n\n I received pong message..... {} \n\n\n\n\n", gameMessage)
 
             ref ! gameMessage.copy(msg = "dong")
 
-        case msg => log.info("unknown message ............ {}", msg)
+        case msg => log.info("\n\n\n\n\n unknown message ............ {} \n\n\n\n\n", msg)
     }
 }

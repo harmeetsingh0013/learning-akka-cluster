@@ -10,7 +10,7 @@ object ScalaTransformerUtility
     private val runtimeMirror: Mirror = universe.runtimeMirror(getClass.getClassLoader)
 
     def invokeToByteArrayMethod(clazz : Class[_], obj: AnyRef) : Array[Byte] = {
-        println(" >>>>>>>>>>>>>>>>> In invokeToByteArrayMethod Method <<<<<<<<<<<<<<<<<<<<")
+//        println(" >>>>>>>>>>>>>>>>> In invokeToByteArrayMethod Method <<<<<<<<<<<<<<<<<<<<")
 
         val instanceMirror : universe.InstanceMirror = runtimeMirror.reflect(obj)
         val methodSymbol : universe.MethodSymbol = instanceMirror.symbol.typeSignature.member(TermName("toByteArray")).asMethod
@@ -18,7 +18,7 @@ object ScalaTransformerUtility
     }
 
     def invokeParseFromMethod(clazz : Class[_], bytes : Array[Byte]) : AnyRef = {
-        println(" >>>>>>>>>>>>>>>>> In invokeParseFromMethod Method <<<<<<<<<<<<<<<<<<<<")
+//        println(" >>>>>>>>>>>>>>>>> In invokeParseFromMethod Method <<<<<<<<<<<<<<<<<<<<")
 
         val protoClass = findProtoClassCanonicalName(clazz)
         val obj = loadCompanionObject(protoClass)
@@ -27,7 +27,7 @@ object ScalaTransformerUtility
     }
 
     def convertEnumerationValueToGeneratedEnumValue(clazz : Class[_], id : Int) : AnyRef = {
-        println(" >>>>>>>>>>>>>>>>> In convertEnumerationValueToGeneratedEnumValue Method <<<<<<<<<<<<<<<<<<<<")
+//        println(" >>>>>>>>>>>>>>>>> In convertEnumerationValueToGeneratedEnumValue Method <<<<<<<<<<<<<<<<<<<<")
 
         val protoClass = findProtoClassCanonicalName(clazz)
         val obj : universe.ModuleMirror = loadCompanionObject(protoClass)
@@ -36,7 +36,7 @@ object ScalaTransformerUtility
     }
 
     def convertGeneratedEnumValueToEnumerationValue(enumerationClassName : String, index: Int): Enumeration#Value = {
-        println(" >>>>>>>>>>>>>>>>> In convertGeneratedEnumValueToEnumerationValue Method <<<<<<<<<<<<<<<<<<<<")
+//        println(" >>>>>>>>>>>>>>>>> In convertGeneratedEnumValueToEnumerationValue Method <<<<<<<<<<<<<<<<<<<<")
 
         val moduleMirror : universe.ModuleMirror = loadCompanionObject(enumerationClassName)
         val enumeration = moduleMirror.instance.asInstanceOf[Enumeration]
@@ -44,7 +44,7 @@ object ScalaTransformerUtility
     }
 
     def findEnumerationOuterType(clazz : Class[_], enumeration: Enumeration#Value) : Class[_ <: AnyRef] = {
-        println(" >>>>>>>>>>>>>>>>> In findEnumerationOuterType Method <<<<<<<<<<<<<<<<<<<<")
+//        println(" >>>>>>>>>>>>>>>>> In findEnumerationOuterType Method <<<<<<<<<<<<<<<<<<<<")
 
         clazz.getMethod("scala$Enumeration$Val$$$outer").invoke(enumeration).getClass
     }

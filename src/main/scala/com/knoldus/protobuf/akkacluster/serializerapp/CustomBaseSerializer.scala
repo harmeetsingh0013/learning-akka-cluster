@@ -18,6 +18,7 @@ class CustomBaseSerializer(val system: ExtendedActorSystem) extends BaseSerializ
                     val anyRef : AnyRef = createInstanceOfProtoClassFromClass(message.getClass.getName, message.getClass, message, null)
                     ScalaTransformerUtility.invokeToByteArrayMethod(anyRef.getClass, anyRef)
                 }
+
             }
             case _ => Array.empty
         }

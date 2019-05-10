@@ -34,22 +34,22 @@ class ClientActor extends Actor with ActorLogging {
                 RewardsPoint(self)
             )
 
-            log.info("***************Start*****************")
-            log.info("\n\n\n")
-            log.info("{}", System.currentTimeMillis())
-            log.info("\n\n\n")
-            log.info("***********************************")
+            println("\n\n\n\n\n***************Start*****************")
+            println("\n\n\n")
+            println(System.currentTimeMillis())
+            println("\n\n\n")
+            log.info("*********************************** \n\n\n\n\n")
 
             cluster ! ClusterClient.Send("/user/backend", gameMessage, true)
 
         case gameMessage @ GameMessage("dong", _, _, _, _, _, _, _, _, _, _, _) =>
 
-            log.info("***************End*****************")
-            log.info("\n\n\n")
-            log.info("{}", System.currentTimeMillis())
-            log.info("\n\n\n")
-            log.info("***********************************")
+            println("\n\n\n\n\n***************End*****************")
+            println("\n\n\n")
+            println(System.currentTimeMillis())
+            println("\n\n\n")
+            println("***********************************\n\n\n\n\n")
 
-        case msg => log.error("unknow message ......... {}", msg)
+        case msg => log.error("unknown message ......... {}", msg)
     }
 }

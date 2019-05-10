@@ -87,7 +87,7 @@ public class JavaTransformerUtility implements ReflectionUtility {
                 }
             } catch (Exception ex) {
 //                ex.printStackTrace();
-                System.out.println("cause field no exists " + from.getName());
+//                System.out.println("cause field no exists " + from.getName());
             }
         }
 
@@ -102,7 +102,7 @@ public class JavaTransformerUtility implements ReflectionUtility {
                 }
             } catch (Exception ex) {
 //                ex.printStackTrace();
-                System.out.println("cause field no exists " + from.getName());
+//                System.out.println("cause field no exists " + from.getName());
             }
         }
 
@@ -120,58 +120,58 @@ public class JavaTransformerUtility implements ReflectionUtility {
 
     private static Object extractValueFromPrimitiveField(Field field, Object data) {
         if (field.getType() == boolean.class) {
-            System.out.println("I am in boolean type : " + field.getType());
+//            System.out.println("I am in boolean type : " + field.getType());
             return extractValueFromField(obj -> field.getBoolean(obj), field, data);
         } else if (field.getType() == byte.class) {
-            System.out.println("I am in byte type : " + field.getType());
+//            System.out.println("I am in byte type : " + field.getType());
             return extractValueFromField(obj -> field.getByte(obj), field, data);
         } else if (field.getType() == char.class) {
-            System.out.println("I am in char type : " + field.getType());
+//            System.out.println("I am in char type : " + field.getType());
             return extractValueFromField(obj -> field.getChar(obj), field, data);
         } else if (field.getType() == short.class) {
-            System.out.println("I am in short type : " + field.getType());
+//            System.out.println("I am in short type : " + field.getType());
             return extractValueFromField(obj -> field.getShort(obj), field, data);
         } else if (field.getType() == int.class) {
-            System.out.println("I am in int type : " + field.getType());
+//            System.out.println("I am in int type : " + field.getType());
             return extractValueFromField(obj -> field.getInt(obj), field, data);
         } else if (field.getType() == long.class) {
-            System.out.println("I am in long type : " + field.getType());
+//            System.out.println("I am in long type : " + field.getType());
             return extractValueFromField(obj -> field.getLong(obj), field, data);
         } else if (field.getType() == float.class) {
-            System.out.println("I am in float type : " + field.getType());
+//            System.out.println("I am in float type : " + field.getType());
             return extractValueFromField(obj -> field.getFloat(obj), field, data);
         } else if (field.getType() == double.class) {
-            System.out.println("I am in double type : " + field.getType());
+//            System.out.println("I am in double type : " + field.getType());
             return extractValueFromField(obj -> field.getDouble(obj), field, data);
         } else if (field.getType() == String.class) {
-            System.out.println("I am in String type : " + field.getType());
+//            System.out.println("I am in String type : " + field.getType());
             return extractValueFromField(obj -> field.get(obj), field, data);
         } else {
-            System.out.println("No matched value in primitive : " + field.getType());
+//            System.out.println("No matched value in primitive : " + field.getType());
             return null;
         }
     }
 
     private static Object extractValueFromObjectField(Field field, Object data, Class<?> toFieldType, ExtendedActorSystem system, Throwable cause) {
         if (field.getType() == ActorRef.class) {
-            System.out.println("I am in ActorRef type : " + field.getType());
+//            System.out.println("I am in ActorRef type : " + field.getType());
             return extractValueFromField(obj -> actorRefToByteString((ActorRef) field.get(obj)), field, data);
         } else if (field.getType() == ByteString.class) {
-            System.out.println("I am in ByteString type : " + field.getType());
+//            System.out.println("I am in ByteString type : " + field.getType());
             return extractValueFromField(obj -> byteStringToActorRef((ByteString) field.get(obj), system), field, data);
         } else if (field.getType() == Option.class) {
-            System.out.println("I am in Option type : " + field.getType());
+//            System.out.println("I am in Option type : " + field.getType());
             return evaluateScalaOptionType(field, data, system, cause);
         } else if (field.getType() == Enumeration.Value.class) {
-            System.out.println("I am in Enumeration.Value type : " + field.getType());
+//            System.out.println("I am in Enumeration.Value type : " + field.getType());
             return extractValueFromField(obj -> field.get(obj), field, data);
         } else if (GeneratedEnum.class.isAssignableFrom(field.getType())) {
-            System.out.println("I am in GeneratedEnum type : " + field.getType());
+//            System.out.println("I am in GeneratedEnum type : " + field.getType());
             String enumerationClassName = findEnumerationClassName(field);
             GeneratedEnum value = (GeneratedEnum) extractValueFromField(obj -> field.get(obj), field, data);
             return ScalaTransformerUtility.convertGeneratedEnumValueToEnumerationValue(enumerationClassName, value.index());
         } else if (Seq.class.isAssignableFrom(field.getType())) {
-            System.out.println("I am in scala.collection.Seq type : " + field.getType());
+//            System.out.println("I am in scala.collection.Seq type : " + field.getType());
             Seq<?> value = (Seq<?>) extractValueFromField(obj -> field.get(obj), field, data);
             Iterator<?> iterator = evaluateScalaSeqType(field, value, system, cause);
             return wrapCollectionTypeToAppropriateType(iterator, toFieldType);
