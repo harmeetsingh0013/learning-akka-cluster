@@ -5,9 +5,10 @@ import "google/protobuf/wrappers.proto";
 
 option (scalapb.options) = {
   scope: FILE
-  package_name: "com.knoldus.protobuf.akkacluster"
+  package_name: "com.knoldus.protobuf.akkacluster.serializerapp"
   flat_package: true
   collection_type: "scala.collection.Seq"
+  import: "com.knoldus.protobuf.akkacluster.serializerapp.EnumsScalaPBMappers._"
 };
 
 message RewardsPointProto{
@@ -52,9 +53,9 @@ message GameMessageProto {
   StageProto stage = 5;
   int32 currentLevel = 6;
   LevelProto optionCurrentLevel = 7;
-  RegionTypeProto regionType = 8;
-  repeated int32 levels = 9 [(scalapb.field).collection_type="List"];
-  repeated int32 levelsV = 10 [(scalapb.field).collection_type="Vector"];
+  RegionTypeProto regionType = 8    [(scalapb.field).type = "com.knoldus.protobuf.akkacluster.serializerapp.RegionType.RegionType"];
+  repeated int32 levels = 9         [(scalapb.field).collection_type="List"];
+  repeated int32 levelsV = 10       [(scalapb.field).collection_type="Vector"];
   repeated StageProto stages = 11;
   RewardsPointProto rewards = 12;
   ThrowableProto cause = 13;
@@ -67,9 +68,9 @@ message GameReplyProto {
   StageProto stage = 4;
   int32 currentLevel = 5;
   LevelProto optionCurrentLevel = 6;
-  RegionTypeProto regionType = 7;
-  repeated int32 levels = 8 [(scalapb.field).collection_type="List"];
-  repeated int32 levelsV = 9 [(scalapb.field).collection_type="Vector"];
+  RegionTypeProto regionType = 7    [(scalapb.field).type = "com.knoldus.protobuf.akkacluster.serializerapp.RegionType.RegionType"];
+  repeated int32 levels = 8         [(scalapb.field).collection_type="List"];
+  repeated int32 levelsV = 9        [(scalapb.field).collection_type="Vector"];
   repeated StageProto stages = 10;
   RewardsPointProto rewards = 11;
 }
