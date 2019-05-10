@@ -1,4 +1,3 @@
-.idea/
-project/target
-project/project
-target/
+.idea
+target
+.iml

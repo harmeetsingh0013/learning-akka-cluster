@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+import "scalapb/scalapb.proto";
+import "google/protobuf/wrappers.proto";
+
+option (scalapb.options) = {
+  scope: FILE
+  package_name: "com.knoldus.protobuf.akkacluster"
+  flat_package: true
+  collection_type: "scala.collection.Seq"
+};
+
+message RewardsPointProto{
+  bytes ref = 1;
+}
+
+message LevelProto{
+  int32 number = 1;
+}
+
+message StageProto {
+    LevelProto level = 1;
+}
+
+enum RegionTypeProto{
+  AWS_NORTH_VIRGINIA = 0;
+  AWS_OHIO = 1;
+  AWS_NORTH_CALIFORNIA = 2;
+  AWS_OREGON = 3;
+  AWS_CANADA = 4;
+  AWS_IRELAND = 5;
+  AWS_FRANFURKT = 6;
+  AWS_LONDON = 7;
+  AWS_SINGAPORE = 8;
+  AWS_SYDNEY = 9;
+  AWS_SEOUL = 10;
+  AWS_TOKYO = 11;
+  AWS_MUMBAI = 12;
+  AWS_SAO_PAOLO = 13;
+  LOCAL_IL_1 = 14;
+}
+
+message ThrowableProto {
+  bytes exception = 1;
+}
+
+message GameMessageProto {
+  string msg = 1;
+  bytes ref = 2;
+  google.protobuf.BoolValue status = 3;
+  google.protobuf.BytesValue optionRef = 4;
+  StageProto stage = 5;
+  int32 currentLevel = 6;
+  LevelProto optionCurrentLevel = 7;
+  RegionTypeProto regionType = 8;
+  repeated int32 levels = 9 [(scalapb.field).collection_type="List"];
+  repeated int32 levelsV = 10 [(scalapb.field).collection_type="Vector"];
+  repeated StageProto stages = 11;
+  RewardsPointProto rewards = 12;
+  ThrowableProto cause = 13;
+}
+
+message GameReplyProto {
+  string msg = 1;
+  google.protobuf.BoolValue status = 2;
+  google.protobuf.BytesValue optionRef = 3;
+  StageProto stage = 4;
+  int32 currentLevel = 5;
+  LevelProto optionCurrentLevel = 6;
+  RegionTypeProto regionType = 7;
+  repeated int32 levels = 8 [(scalapb.field).collection_type="List"];
+  repeated int32 levelsV = 9 [(scalapb.field).collection_type="Vector"];
+  repeated StageProto stages = 10;
+  RewardsPointProto rewards = 11;
+}
